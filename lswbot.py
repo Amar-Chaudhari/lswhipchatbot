@@ -20,7 +20,7 @@ try:
 
     for server in content:
         #if server.bareMetal['serverName'] == "BWND069":
-            print server+"/n"
+            print server
 
 except httplib.HTTPException, e:
     # Exception
