@@ -18,7 +18,7 @@ try:
     # Success
     print('Response status ' + str(response.status))
 
-    for server in content.bareMetals:
+    for server in content:
         if server['serverName'] == "BWND069":
             print server
 
