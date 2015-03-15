@@ -22,15 +22,16 @@ class LswBot(WillPlugin):
                     if server['bareMetal']['serverName'] == server_id:
                         baremetalid=server['bareMetal']['bareMetalId']
                         break
-                if baremetalid:
-                    url = "https://api.leaseweb.com/v1/bareMetals/"+str(baremetalid)+"/switchPort"
-                    r =requests.get(url,headers={"Accept": "application/json","X-Lsw-Auth": lsw_key })
-                    if r.status_code==200:
-                        data = r.json()
-                        self.reply(message, str(data))
-                    elif r.status_code==400:
-                        self.reply(message, "BareMetal Server Not found")
-                else:
+                try:
+                    if baremetalid:
+                        url = "https://api.leaseweb.com/v1/bareMetals/"+str(baremetalid)+"/switchPort"
+                        r =requests.get(url,headers={"Accept": "application/json","X-Lsw-Auth": lsw_key })
+                        if r.status_code==200:
+                            data = r.json()
+                            self.reply(message, str(data))
+                        elif r.status_code==400:
+                            self.reply(message, "BareMetal Server Not found")
+                except UnboundLocalError:
                     self.reply(message, "Server not found")
             except requests.exceptions.Timeout, e:
             #Exception
