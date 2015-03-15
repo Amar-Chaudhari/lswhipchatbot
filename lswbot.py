@@ -1,23 +1,14 @@
 __author__ = 'amarchaudhari'
 import config
 import requests
+from will.plugin import WillPlugin
+from will.decorators import respond_to, periodic, hear, randomly, route, rendered_template, require_settings
 
-# Request: LeaseWeb API (https://api.leaseweb.com/v1/bareMetals)
-lsw_key = config.lsw_api_key
 
+class BonjourPlugin(WillPlugin):
 
-# Headers
+    @respond_to("switchport (status) (BWND[0-9]*)")
+    def say_bonjour_will(self, message,status,server_id):
+        """bonjour: I know how to say bonjour! In French!"""
+        self.reply(message, str(status)+" "+str(server_id))
 
-# Send synchronously
-try:
-    r =requests.get("https://api.leaseweb.com/v1/bareMetals",headers={"Accept": "application/json","X-Lsw-Auth": lsw_key })
-    # Success
-    print('Response status ' + str(r.status_code))
-    data = r.json()
-    for server in data['bareMetals']:
-        if server['bareMetal']['serverName'] == 'BWND012':
-            print server
-
-except requests.exceptions.Timeout, e:
-    # Exception
-    print('Exception during request')
