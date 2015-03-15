@@ -48,7 +48,7 @@ class SwitchPortDisable(WillPlugin):
                     if baremetalid:
                         # headers
                         headers = {'Accept': 'application/json','X-Lsw-Auth': lsw_key}
-                        apicall = "https://api.leaseweb.com/v1/bareMetals/"+str(baremetalid)+"switchPort/close"
+                        apicall = "https://api.leaseweb.com/v1/bareMetals/"+str(baremetalid)+"/switchPort/close"
                         r =requests.post(url=apicall,headers=headers)
                         if r.status_code==200:
                             self.reply(message,"Switch Port of "+str(full_server_id)+" has been Disabled",color="green")
@@ -72,7 +72,7 @@ class SwitchPortEnable(WillPlugin):
                     if baremetalid:
                         # headers
                         headers = {'Accept': 'application/json','X-Lsw-Auth': lsw_key}
-                        apicall = "https://api.leaseweb.com/v1/bareMetals/"+str(baremetalid)+"switchPort/open"
+                        apicall = "https://api.leaseweb.com/v1/bareMetals/"+str(baremetalid)+"/switchPort/open"
                         r =requests.post(url=apicall,headers=headers)
                         if r.status_code==200:
                             self.reply(message,"Switch Port of "+str(full_server_id)+" has been Enabled",color="green")
