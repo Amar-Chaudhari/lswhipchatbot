@@ -18,7 +18,7 @@ try:
     content = response.read()
     # Success
     print('Response status ' + str(response.status))
-    data = json.load(content)
+    data = json.load(response)
     for server in data:
         #if server.bareMetal['serverName'] == "BWND069":
             print server
