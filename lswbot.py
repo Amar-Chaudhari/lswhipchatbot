@@ -6,8 +6,8 @@ import httplib
 connection = httplib.HTTPConnection('api.leaseweb.com', 443, timeout = 30)
 
 # Headers
-print config.lsw_api_key
-headers = {"X-Lsw-Auth": '%s' } % str(config.lsw_api_key)
+lsw_key = config.lsw_api_key
+headers = {"X-Lsw-Auth": '%s' } % lsw_key
 
 # Send synchronously
 
