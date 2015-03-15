@@ -28,7 +28,10 @@ class LswBot(WillPlugin):
                         r =requests.get(url,headers={"Accept": "application/json","X-Lsw-Auth": lsw_key })
                         if r.status_code==200:
                             data = r.json()
-                            self.reply(message, str(data))
+                            if data['switchPort']['status'] == 'open':
+                                self.reply(message, str(data['switchPort']['serverName'])+":Enabled")
+                            elif data['switchPort']['status'] == 'closed':
+                                self.reply(message, str(data['switchPort']['serverName'])+":Disabled")
                         elif r.status_code==400:
                             self.reply(message, "BareMetal Server Not found")
                 except UnboundLocalError:
