@@ -5,7 +5,7 @@ from will.plugin import WillPlugin
 from will.decorators import respond_to, periodic, hear, randomly, route, rendered_template, require_settings
 
 
-class LswBot(WillPlugin):
+class GetSwitchPortStatus(WillPlugin):
 
     @respond_to("switchport status (?P<server_id>.*)")
     def say_switchport_status(self, message,server_id=None):
@@ -37,6 +37,7 @@ class LswBot(WillPlugin):
             self.reply(message, "No Server ID",color="red")
 
 
+class SwitchPortDisable(WillPlugin):
         @respond_to("switchport disable (?P<server_id>.*)")
         def say_switchport_disable(self, message,server_id=None):
             if server_id:
@@ -60,6 +61,7 @@ class LswBot(WillPlugin):
                 except requests.exceptions.Timeout, e:
                     self.reply(message, "Request timed out , try again !",color="red")
 
+class SwitchPortEnable(WillPlugin):
         @respond_to("switchport enable (?P<server_id>.*)")
         def say_switchport_enable(self, message,server_id=None):
             if server_id:
