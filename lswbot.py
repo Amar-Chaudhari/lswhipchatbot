@@ -11,6 +11,7 @@ class LswBot(WillPlugin):
     def say_switchport_status(self, message,server_id=None):
         if server_id:
             full_server_id = "BWND"+str(server_id)
+            lsw_key = config.lsw_api_key
             # Request: LeaseWeb API (https://api.leaseweb.com/v1/bareMetals)
             try:
                 baremetalid=get_baremetal_id(full_server_id)
@@ -38,6 +39,7 @@ class LswBot(WillPlugin):
 
 
 def get_baremetal_id(server_id):
+
             lsw_key = config.lsw_api_key
 
             try:
