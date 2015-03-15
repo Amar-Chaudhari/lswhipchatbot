@@ -19,8 +19,8 @@ try:
     print('Response status ' + str(response.status))
 
     for server in content:
-        if server.bareMetal['serverName'] == "BWND069":
-            print server.bareMetal
+        #if server.bareMetal['serverName'] == "BWND069":
+            print server+"/n"
 
 except httplib.HTTPException, e:
     # Exception
