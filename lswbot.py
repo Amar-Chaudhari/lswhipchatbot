@@ -13,11 +13,15 @@ headers = {"X-Lsw-Auth": lsw_key }
 
 connection.request('GET', '/v1/bareMetals', None, headers)
 try:
-	response = connection.getresponse()
-	content = response.read()
-	# Success
-	print('Response status ' + str(response.status))
-        print content
+    response = connection.getresponse()
+    content = response.read()
+    # Success
+    print('Response status ' + str(response.status))
+
+    for server in content.bareMetals:
+        if server['serverName'] == "BWND069":
+            print server
+
 except httplib.HTTPException, e:
-	# Exception
-	print('Exception during request')
+    # Exception
+    print('Exception during request')
