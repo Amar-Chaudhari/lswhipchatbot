@@ -14,7 +14,7 @@ try:
     # Success
     print('Response status ' + str(r.status_code))
     data = r.json()
-    for server in data:
+    for server in data.bareMetals:
         #if server.bareMetal['serverName'] == "BWND069":
             print server
 
