@@ -36,21 +36,6 @@ class LswBot(WillPlugin):
             self.reply(message, "No Server ID",color="red")
 
 
-        @respond_to("switchport disable (?P<server_id>.*)")
-        def say_switchport_disable(self, message,server_id=None):
-            if server_id:
-                full_server_id = "BWND"+str(server_id)
-                lsw_key = config.lsw_api_key
-                try:
-
-                    # headers
-                    headers = {'Accept': 'application/json','X-Lsw-Auth': lsw_key}
-                    url
-                    r =requests.get("https://api.leaseweb.com/v1/bareMetals",headers=headers)
-                    # Success
-                    print('Response status ' + str(r.status_code))
-                except:
-
 
         def get_baremetal_id(server_id):
             lsw_key = config.lsw_api_key
