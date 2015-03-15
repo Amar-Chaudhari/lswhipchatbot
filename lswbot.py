@@ -37,6 +37,53 @@ class LswBot(WillPlugin):
             self.reply(message, "No Server ID",color="red")
 
 
+        @respond_to("switchport disable (?P<server_id>.*)")
+        def say_switchport_disable(self, message,server_id=None):
+            if server_id:
+                full_server_id = "BWND"+str(server_id)
+                lsw_key = config.lsw_api_key
+                baremetalid=get_baremetal_id(full_server_id)
+                try:
+                    if baremetalid:
+                        # headers
+                        headers = {'Accept': 'application/json','X-Lsw-Auth': lsw_key}
+                        apicall = "https://api.leaseweb.com/v1/bareMetals/"+str(baremetalid)+"switchPort/close"
+                        r =requests.post(url=apicall,headers=headers)
+                        if r.status_code==200:
+                            self.reply(message,"Switch Port of "+str(full_server_id)+" has been Disabled",color="green")
+                        elif r.status_code==500:
+                            self.reply(message,"Leaseweb api down/not working , try again in a while",color="red")
+                        elif r.status_code==404:
+                            self.reply(message, "BareMetal Server Not found",color="red")
+                    else:
+                        self.reply(message, "BareMetal Server Not found",color="red")
+                except requests.exceptions.Timeout, e:
+                    self.reply(message, "Request timed out , try again !",color="red")
+
+        @respond_to("switchport enable (?P<server_id>.*)")
+        def say_switchport_enable(self, message,server_id=None):
+            if server_id:
+                full_server_id = "BWND"+str(server_id)
+                lsw_key = config.lsw_api_key
+                baremetalid=get_baremetal_id(full_server_id)
+                try:
+                    if baremetalid:
+                        # headers
+                        headers = {'Accept': 'application/json','X-Lsw-Auth': lsw_key}
+                        apicall = "https://api.leaseweb.com/v1/bareMetals/"+str(baremetalid)+"switchPort/open"
+                        r =requests.post(url=apicall,headers=headers)
+                        if r.status_code==200:
+                            self.reply(message,"Switch Port of "+str(full_server_id)+" has been Enabled",color="green")
+                        elif r.status_code==500:
+                            self.reply(message,"Leaseweb api down/not working , try again in a while",color="red")
+                        elif r.status_code==404:
+                            self.reply(message, "BareMetal Server Not found",color="red")
+                    else:
+                        self.reply(message, "BareMetal Server Not found",color="red")
+                except requests.exceptions.Timeout, e:
+                    self.reply(message, "Request timed out , try again !",color="red")
+
+
 
 def get_baremetal_id(server_id):
 
