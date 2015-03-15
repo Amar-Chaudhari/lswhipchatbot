@@ -8,7 +8,6 @@ from will.decorators import respond_to, periodic, hear, randomly, route, rendere
 class BonjourPlugin(WillPlugin):
 
     @respond_to("switchport (status) (BWND[0-9]*)")
-    def say_bonjour_will(self, message,status,server_id):
-        """bonjour: I know how to say bonjour! In French!"""
+    def say_bonjour_will(self, message,status,server_id,tmp):
         self.reply(message, str(status)+" "+str(server_id))
 
