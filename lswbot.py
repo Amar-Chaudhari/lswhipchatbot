@@ -1,28 +1,23 @@
 __author__ = 'amarchaudhari'
 import config
-import httplib
-import json
+import requests
+
 # Request: LeaseWeb API (https://api.leaseweb.com/v1/bareMetals)
-
-connection = httplib.HTTPSConnection('api.leaseweb.com', 443, timeout = 30)
-
-# Headers
 lsw_key = config.lsw_api_key
 headers = {"Accept": "application/json","X-Lsw-Auth": lsw_key }
 
-# Send synchronously
+# Headers
 
-connection.request('GET', '/v1/bareMetals', None, headers)
+# Send synchronously
 try:
-    response = connection.getresponse()
-    content = response.read()
+    r =requests.get("https://api.leaseweb.com/v1/bareMetals",headers)
     # Success
-    print('Response status ' + str(response.status))
-    data = json.load(response)
+    print('Response status ' + str(r.status_code))
+    data = r.json()
     for server in data:
         #if server.bareMetal['serverName'] == "BWND069":
             print server
 
-except httplib.HTTPException, e:
+except requests.exceptions.Timeout, e:
     # Exception
     print('Exception during request')
