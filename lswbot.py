@@ -10,6 +10,7 @@ class LswBot(WillPlugin):
     @respond_to("switchport status (?P<server_id>.*)")
     def say_switchport_status(self, message,server_id=None):
         if server_id:
+            full_server_id = "BWND"+str(server_id)
             # Request: LeaseWeb API (https://api.leaseweb.com/v1/bareMetals)
             lsw_key = config.lsw_api_key
             # Send synchronously
@@ -19,7 +20,7 @@ class LswBot(WillPlugin):
                 print('Response status ' + str(r.status_code))
                 data = r.json()
                 for server in data['bareMetals']:
-                    if server['bareMetal']['serverName'] == server_id:
+                    if server['bareMetal']['serverName'] == full_server_id:
                         baremetalid=server['bareMetal']['bareMetalId']
                         break
                 try:
