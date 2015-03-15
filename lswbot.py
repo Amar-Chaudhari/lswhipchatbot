@@ -20,4 +20,4 @@ try:
     print content
 except httplib.HTTPException, e:
 	# Exception
-	print('Exception during request')s
+	print('Exception during request')
