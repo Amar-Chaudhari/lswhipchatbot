@@ -15,7 +15,7 @@ try:
     print('Response status ' + str(r.status_code))
     data = r.json()
     for server in data['bareMetals']:
-        if server['serverName'] == "BWND012":
+        if server.bareMetal['serverName'] == 'BWND012':
             print server
 
 except requests.exceptions.Timeout, e:
