@@ -20,7 +20,7 @@ class LswBot(WillPlugin):
                 data = r.json()
                 for server in data['bareMetals']:
                     if server['bareMetal']['serverName'] == server_id:
-                        baremetalid=server['bareMetal']['u'bareMetalId']
+                        baremetalid=server['bareMetal']['bareMetalId']
                         break
                 if baremetalid:
                     url = "https://api.leaseweb.com/v1/bareMetals/"+str(baremetalid)+"/switchPort"
