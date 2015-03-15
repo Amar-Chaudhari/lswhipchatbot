@@ -36,11 +36,11 @@ class LswBot(WillPlugin):
                         elif r.status_code==400:
                             self.reply(message, "BareMetal Server Not found")
                 except UnboundLocalError:
-                    self.reply(message, "Server not found")
+                    self.reply(message, "Server not found",color="red")
             except requests.exceptions.Timeout, e:
             #Exception
-                self.reply(message, "Request timed out , try again !")
+                self.reply(message, "Request timed out , try again !",color="red")
 
         else:
-            self.reply(message, "No Server ID")
+            self.reply(message, "No Server ID",color="red")
 
