@@ -3,7 +3,7 @@ import config
 import httplib
 # Request: LeaseWeb API (https://api.leaseweb.com/v1/bareMetals)
 
-connection = httplib.HTTPConnection('api.leaseweb.com', 443, timeout = 30)
+connection = httplib.HTTPSConnection('api.leaseweb.com', 443, timeout = 30)
 
 # Headers
 lsw_key = config.lsw_api_key
