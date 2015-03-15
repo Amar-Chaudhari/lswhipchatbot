@@ -7,7 +7,7 @@ connection = httplib.HTTPConnection('api.leaseweb.com', 443, timeout = 30)
 
 # Headers
 
-headers = {"X-Lsw-Auth": '%s' } % (config.lsw_api_key)
+headers = {"X-Lsw-Auth": '%s' } % (str(config.lsw_api_key))
 
 # Send synchronously
 
