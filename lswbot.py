@@ -13,7 +13,7 @@ class LswBot(WillPlugin):
             full_server_id = "BWND"+str(server_id)
             # Request: LeaseWeb API (https://api.leaseweb.com/v1/bareMetals)
             try:
-                baremetalid=self.get_baremetal_id(full_server_id)
+                baremetalid=get_baremetal_id(full_server_id)
                 if baremetalid:
                         url = "https://api.leaseweb.com/v1/bareMetals/"+str(baremetalid)+"/switchPort"
                         r =requests.get(url,headers={"Accept": "application/json","X-Lsw-Auth": lsw_key })
@@ -37,7 +37,7 @@ class LswBot(WillPlugin):
 
 
 
-        def get_baremetal_id(server_id):
+def get_baremetal_id(server_id):
             lsw_key = config.lsw_api_key
 
             try:
