@@ -20,12 +20,18 @@ class LswBot(WillPlugin):
                 data = r.json()
                 for server in data['bareMetals']:
                     if server['bareMetal']['serverName'] == server_id:
-                        status=server
+                        baremetalid=server['bareMetal']['u'bareMetalId']
                         break
-                if status:
-                    self.reply(message, str(status))
+                if baremetalid:
+                    url = "https://api.leaseweb.com/v1/bareMetals/"+str(baremetalid)+"/switchPort"
+                    r =requests.get(url,headers={"Accept": "application/json","X-Lsw-Auth": lsw_key })
+                    if r.status_code==200:
+                        data = r.json()
+                        self.reply(message, str(data))
+                    elif r.status_code==400:
+                        self.reply(message, "BareMetal Server Not found")
                 else:
-                    self.reply(message, "Status could not be determined")
+                    self.reply(message, "Server not found")
             except requests.exceptions.Timeout, e:
             #Exception
                 self.reply(message, "Request timed out , try again !")
