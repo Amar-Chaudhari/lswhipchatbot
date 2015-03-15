@@ -8,7 +8,7 @@ from will.decorators import respond_to, periodic, hear, randomly, route, rendere
 class LswBot(WillPlugin):
 
     @respond_to("switchport status (?P<server_id>.*)")
-    def say_switchport_status(self, message,server_id):
+    def say_switchport_status(self, message,server_id=None):
         if server_id:
             # Request: LeaseWeb API (https://api.leaseweb.com/v1/bareMetals)
             lsw_key = config.lsw_api_key
@@ -23,7 +23,7 @@ class LswBot(WillPlugin):
                         status=server
                         break
                 if status:
-                    self.reply(message, status)
+                    self.reply(message, str(status))
                 else:
                     self.reply(message, "Status could not be determined")
             except requests.exceptions.Timeout, e:
