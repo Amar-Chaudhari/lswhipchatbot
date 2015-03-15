@@ -17,7 +17,7 @@ try:
 	content = response.read()
 	# Success
 	print('Response status ' + str(response.status))
-    print content
+        print content
 except httplib.HTTPException, e:
 	# Exception
 	print('Exception during request')
