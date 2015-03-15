@@ -7,7 +7,7 @@ from will.decorators import respond_to, periodic, hear, randomly, route, rendere
 
 class BonjourPlugin(WillPlugin):
 
-    @respond_to("switchport (status) (BWND[0-9]*)")
-    def say_bonjour_will(self, message,status,server_id,tmp):
-        self.reply(message, str(status)+" "+str(server_id))
+    @respond_to("switchport status (BWND[0-9]*)")
+    def say_bonjour_will(self, message,server_id):
+        self.reply(message, "server online"+str(server_id))
 
