@@ -46,7 +46,7 @@ def get_baremetal_id(server_id):
                 print('Response status ' + str(r.status_code))
                 data = r.json()
                 for server in data['bareMetals']:
-                    if server['bareMetal']['serverName'] == full_server_id:
+                    if server['bareMetal']['serverName'] == server_id:
                         baremetalid=server['bareMetal']['bareMetalId']
                         break
                 try:
