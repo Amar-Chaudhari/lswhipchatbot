@@ -6,12 +6,12 @@ Leaseweb Server management plugin for Python "Will Bot" for Hipchat
 2. Copy files to "/plugins" folder of Will Bot
 3. Restart the Bot
 
-# Features
+## Features
 1. Check switchport status
 2. Enable / Disable switch port
 
-# How to Use ?
+## How to Use ?
 @bot switchport status 123  // No need to Enter BWDN
 
-# Credits
+## Credits
 @skoczen for the awesome Will 
